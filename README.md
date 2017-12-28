@@ -11,4 +11,4 @@ the sync technology provided by DOT
 
 ## White Papers
 
-[Issues in real time collaboration](https://dotchain.github.com/site/CollaborativeData.html)
+[Issues in real time collaboration](https://dotchain.github.io/site/CollaborativeData.html)
