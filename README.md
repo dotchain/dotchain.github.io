@@ -1,14 +1,25 @@
-# DOT, Chain
+# Dot and Chain projects
 
-DOTChain is meant to be a collection of cross-platform technology and
-tools to build data-synchronization and pub-sub applications.
+There are two general projects here. The Dot project is about
+distributed object synchronization: [documentation](dot.md).
 
-1. DOT is the core Operations Transformation based synchronization and
-pub-sub platform technology.  Please see the [Roadmap](Roadmap.md)
+The chain project is not yet started.  It is mainly about working
+with derived data in a reactive way.
 
-2. Chain is the FRP backbone which helps build live applications using
-the sync technology provided by DOT
+## Whitepapers
 
-## White Papers
+[Derived data](CollaborativeData.md)
+[Composable Operations](ComposableOperations.md)
+[Implementing Rich Text](ImplementingRichText.md)
+[Implementing Undo](Undo.md)
 
-[Issues in real time collaboration](https://dotchain.github.io/site/CollaborativeData.html)
+## Links
+
+[DOT Server](https://github.com/dotchain/dots)
+
+[DOT Client](https://github.com/dotchain/ver)
+
+[DOT Protocol](spec/Protocol.md)
+
+[DOT Urls](spec/Urls.md)
+
