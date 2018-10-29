@@ -1,8 +1,7 @@
 # Composable Operations
 
 One of the distinguishing features of the approach to operational transformations
-in DOT is the reliance on a small number of mutation types: Splice, Move, Set and
-Range.
+in DOT is the reliance on a small number of mutation types: Splice, Move and Replace.
 
 ## Why so few mutation types?
 
@@ -18,7 +17,7 @@ rely on the ability to rebuild the model from previous mutations.  Changing the
 meaning would need a special upgrade step or potentially adding new versions as
 new mutations (in which case both old and new mutations may need to be supported
 side by side for a while).  Sticking to a small but minimal set of mutations
-sidesteps this problem for most typical usage.
+sidesteps this problem for the typical usage.
 
 
 3. The test matrix for mutations is non-linear on the number of mutattion types.
@@ -38,7 +37,7 @@ or other errors.
 
 There are two ways to get rich mutations:
 
-1. Treat the low level mutation types used in OT as an assembly language two write
+1. Treat the low level mutation types used in OT as an assembly language to write
 high level mutations. This leads to a lot of fairly powerful high level mutation
 types that are immediately compatible in the system and do not require any transforms
 to be written for them.  Also, the high level methods can be changed at any time
@@ -51,8 +50,7 @@ An example of this is Rich Text.  Please see [ImplementingRichText]
 2. Treat mutation types as generic.  For example, the Splice mutation type in this
 library works on arrays (of arbitrary types) or strings.  This is achieved by the
 OT library passing the buck to the developer in providing an "Array-Like" access 
-interface (to be specific, see
-[encoding](https://godoc.org/github.com/dotchain/dot/encoding))
+interface
 
 In fact, this can be used to implement stacks, queues or any collection as they
 all conform to array-like semantics -- so long as the basic mutation of the data 
@@ -60,7 +58,7 @@ structure are represented as a `Splice`.  '
 
 An esoteric example is counters.  On the face of it, incrementing or decrementing
 numbers does not have anything to do with sets or arrays.  But a virtual array
-of numbers can effectively specify a number (the total of all elements) and also
+of numbers can effectively specify a number (the sum of all elements) and also
 allow increments (insert the increment) and decrements (insert the negative).
 This might seem like it would grow the array indefinitely and be a burden to
 store the array but the interesting aspect here is that the array itself never
@@ -88,11 +86,13 @@ is to mark consistency boundaries.  For example, DOT defines operations as a
 set of changes and consistency can be maintained at the operation boundary but
 not the individual change boundary.
 
-2. Transformation integrity.  Consider an integrity constraint like the total
-count of elements in two seperate arrays if fixed.  It is possible that two
+2. Transformation integrity.  Consider an integrity constraint like "the total
+count of elements in two seperate arrays is capped".  It is possible that two
 simultaneous legal edits, when merged, can lead to breaking the constraint.
 This is generally a very difficult problem for all Operational Transformation
 systems but particularly harder with a minimal approach.
+
+### Some general workarounds for integrity issues
 
 1. Allow loose consistency of the virtual document. In practice, this would
 mean allow tables with rows not indexed or rows with tables not indexed (and
